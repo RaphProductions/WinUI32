@@ -10,6 +10,7 @@ namespace TestApp
 
         public Form1()
         {
+            BackdropApplied = true;
             InitializeComponent();
             _micaBrush = new MicaBrush();
             _micaBrush.TargetWindow = this;
@@ -31,7 +32,15 @@ namespace TestApp
 
         private void button3_ThemeChanged(object sender, EventArgs e)
         {
-            pictureBox1.Image = button2.bp;
+            button1.Text = "theme : " + button3.ElementTheme;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (button3.ElementTheme == Theme.Dark)
+                button3.ElementTheme = Theme.Light;
+            else
+                button3.ElementTheme = Theme.Dark;
         }
     }
 }

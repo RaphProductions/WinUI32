@@ -76,7 +76,7 @@ namespace Windows.UI.Controls
                     
                     this.ForeColor = ThemeResource.DarkAppForegroundColor;
 
-                    foreach (System.Windows.Forms.Control c in Controls)
+                    /**foreach (System.Windows.Forms.Control c in Controls)
                     {
                         if (c.GetType() == typeof(Control))
                         {
@@ -86,7 +86,8 @@ namespace Windows.UI.Controls
                         {
                             c.ForeColor = ThemeResource.DarkAppForegroundColor;
                         }
-                    }
+                    }**/
+                    UpdateControlsTheme();
                     break;
                 case Theme.Light:
                     var False = 0;
@@ -97,7 +98,7 @@ namespace Windows.UI.Controls
 
                     this.ForeColor = ThemeResource.LightAppForegroundColor;
 
-                    foreach (System.Windows.Forms.Control c in Controls)
+                    /**foreach (System.Windows.Forms.Control c in Controls)
                     {
                         if (c.GetType() == typeof(Control))
                         {
@@ -107,11 +108,31 @@ namespace Windows.UI.Controls
                         {
                             c.ForeColor = ThemeResource.LightAppForegroundColor;
                         }
-                    }
+                    }**/
+                    UpdateControlsTheme();
                     break;
             }
             if (ThemeChanged != null)
                 ThemeChanged.Invoke(this, EventArgs.Empty);
+        }
+
+        void UpdateControlsTheme()
+        {
+            foreach (System.Windows.Forms.Control c in Controls)
+            {
+                // hell, i need to do that for each custom controls
+                if (c.GetType() == typeof(Button))
+                {
+                    ((Button)c).ElementTheme = this._elementTheme;
+                }
+                else
+                {
+                    if (ElementTheme == Theme.Dark)
+                        c.ForeColor = ThemeResource.DarkAppForegroundColor;
+                    else
+                        c.ForeColor = ThemeResource.LightAppForegroundColor;
+                }
+            }
         }
     }
 }

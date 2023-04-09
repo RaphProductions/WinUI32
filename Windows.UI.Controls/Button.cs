@@ -88,6 +88,11 @@ namespace Windows.UI.Controls
                     break;
             }
 
+            if (UsingDarkMode)
+                ForeColor = ThemeResource.DarkAppForegroundColor;
+            else
+                ForeColor = ThemeResource.LightAppForegroundColor;
+
             var tpart = ThemeParts.Defaulted;
             switch (CurrentState)
             {
@@ -120,7 +125,14 @@ namespace Windows.UI.Controls
             }
             else
             {
-                var part = VisualStyleHandler.GetButtonPart(currentVs);
+                StylePart part = null;
+
+                if (UsingDarkMode)
+                    part = VisualStyleHandler.GetButtonPart(VisualStyleHandler.DarkStyle);
+                else
+                    part = VisualStyleHandler.GetButtonPart(VisualStyleHandler.LightStyle);
+
+
                 var renderer2 = new PartRenderer(currentVs, part);
                 buttonImage = renderer2.RenderPreview(tpart, Width, Height);
                 bp = buttonImage;
@@ -130,6 +142,8 @@ namespace Windows.UI.Controls
             {
                 return;
             }
+
+            args.Graphics.DrawImage(buttonImage, 0, 0);
 
             //TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter;
             //TextRenderer.DrawText(args.Graphics, _ButtonText, Font, new Point(Width + 3, this.Height / 2), ForeColor, flags);
@@ -172,7 +186,6 @@ namespace Windows.UI.Controls
             };
 
             NativeMethods.SelectObject(memoryHdc, Font.ToHfont());
-
             var h = NativeMethods.DrawThemeTextEx(renderer.Handle, memoryHdc, NativeMethods.WP_CAPTION, NativeMethods.CS_ACTIVE, ButtonText, -1, (int)(TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine), ref rect, ref opt);
 
             const int SRCCOPY = 0x00CC0020;
