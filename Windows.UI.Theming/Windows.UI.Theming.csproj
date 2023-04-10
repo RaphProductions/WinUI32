@@ -5,6 +5,25 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageId>WinUI32.Theming</PackageId>
+    <Title>WinUI32 (Theming)</Title>
+    <Version>0.1.0</Version>
+    <Authors>RaphMar2021</Authors>
+    <Company />
+    <Product>WinUI32 (Theming)</Product>
+    <Description>Theming Library of the WinUI32 framework</Description>
+    <Copyright>Copyright (C) Raphael</Copyright>
+    <PackageProjectUrl>https://github.com/RaphMar2021/WinUI32</PackageProjectUrl>
+    <PackageIcon>Icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/RaphMar2021/WinUI32</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>c# uiframework winforms visualstyles</PackageTags>
+    <PackageReleaseNotes>Version 0.1.0 :
+First Release</PackageReleaseNotes>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +45,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
