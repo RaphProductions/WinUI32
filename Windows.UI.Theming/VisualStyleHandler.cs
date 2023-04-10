@@ -51,5 +51,13 @@ namespace Windows.UI.Theming
         {
             return (from classes in v.Classes.Values where classes.ClassName == "Button" from parts in classes.Parts where parts.Value.PartName == "PUSHBUTTON" select parts.Value).FirstOrDefault();
         }
+        public static StylePart GetEditBorder(VisualStyle v)
+        {
+            return (from classes in v.Classes.Values where classes.ClassName == "Edit" from parts in classes.Parts where parts.Value.PartName == "EDITBORDER_NOSCROLL" select parts.Value).FirstOrDefault();
+        }
+        public static StylePart GetEditBackground(VisualStyle v)
+        {
+            return (from classes in v.Classes.Values where classes.ClassName == "Edit" from parts in classes.Parts where parts.Value.PartName == "EDITBORDER_NOSCROLL" select parts.Value).Last();
+        }
     }
 }

@@ -119,9 +119,15 @@ namespace Windows.UI.Controls
                 buttonImage = new Bitmap(Width, Height);
 
                 var g = Graphics.FromImage(buttonImage);
-                var rectt = new Rectangle(0, 0, Width, Height);
-                var lBrush = new LinearGradientBrush(rectt, Color.Red, Color.Orange, LinearGradientMode.BackwardDiagonal);
-                g.FillRectangle(lBrush, rectt);
+                var rect2 = new Rectangle(0, 0, Width, Height);
+                var color = Color.Black;
+
+                if (UsingDarkMode)
+                    color = ThemeResource.DarkAppBackgroundColor;
+                else
+                    color = ThemeResource.LightAppBackgroundColor;
+
+                g.FillPath(new SolidBrush(color), RoundedCornersRenderer.CreatePath(rect2, 7));
             }
             else
             {
@@ -132,7 +138,7 @@ namespace Windows.UI.Controls
                 else
                     part = VisualStyleHandler.GetButtonPart(VisualStyleHandler.LightStyle);
 
-
+                
                 var renderer2 = new PartRenderer(currentVs, part);
                 buttonImage = renderer2.RenderPreview(tpart, Width, Height);
                 bp = buttonImage;

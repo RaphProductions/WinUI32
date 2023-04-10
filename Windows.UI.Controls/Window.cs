@@ -17,6 +17,8 @@ namespace Windows.UI.Controls
         private bool _extendFrameIntoClientArea = false;
         private Theme _elementTheme = Theme.Light;
 
+        public uint Glyph { get; set; }
+
         public bool BackdropApplied;
 
         public event EventHandler ThemeChanged;

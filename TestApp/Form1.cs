@@ -6,20 +6,30 @@ namespace TestApp
 {
     public partial class Form1 : Window
     {
-        MicaBrush _micaBrush;
-
+        /**Mica**/
+        AcrylicBrush _micaBrush;
         public Form1()
         {
             BackdropApplied = true;
             InitializeComponent();
-            _micaBrush = new MicaBrush();
+            _micaBrush = new /**Mica**/AcrylicBrush();
             _micaBrush.TargetWindow = this;
-            _micaBrush.Kind = MicaKind.MicaAlt;
+            //_micaBrush.Kind = MicaKind.MicaAlt;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             _micaBrush.ApplyBackdrop();
+            ElementTheme = SystemThemeHandler.AppTheme;
+            SystemThemeHandler.OnThemeChanged += SystemThemeHandler_OnThemeChanged;
+        }
+
+        private void SystemThemeHandler_OnThemeChanged(object? sender, EventArgs e)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                ElementTheme = SystemThemeHandler.AppTheme;
+            }));
         }
 
         private void button3_Click(object sender, EventArgs e)
