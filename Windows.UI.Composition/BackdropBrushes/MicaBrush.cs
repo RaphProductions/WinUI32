@@ -29,20 +29,28 @@ namespace Windows.UI.Composition.BackdropBrushes
             if (TargetWindow == null)
                 throw new NullReferenceException("Property 'TargetForm' is null");
 
-            if (Environment.OSVersion.Version.Build < 22621)
-                throw new NotSupportedException("The APIs used for applying backdrops needs Windows 11 22H2 to work.");
+            if (Environment.OSVersion.Version.Build < 22000)
+                throw new NotSupportedException("The APIs used for applying backdrops needs Windows 11 21H2 to work.");
 
-            switch (Kind)
+            if (Environment.OSVersion.Version.Build >= 22621)
             {
-                case MicaKind.Mica:
-                    DWMAPI.DwmSetWindowAttribute(TargetWindow.Handle, DWMAPI.DwmWindowAttribute.SystemBackdropType, ref Mica, sizeof(Int32));
-                    break;
-                case MicaKind.MicaAlt:
-                    DWMAPI.DwmSetWindowAttribute(TargetWindow.Handle, DWMAPI.DwmWindowAttribute.SystemBackdropType, ref MicaAlt, sizeof(Int32));
-                    break;
-                default:
-                    DWMAPI.DwmSetWindowAttribute(TargetWindow.Handle, DWMAPI.DwmWindowAttribute.SystemBackdropType, ref Mica, sizeof(Int32));
-                    break;
+                switch (Kind)
+                {
+                    case MicaKind.Mica:
+                        DWMAPI.DwmSetWindowAttribute(TargetWindow.Handle, DWMAPI.DwmWindowAttribute.SystemBackdropType, ref Mica, sizeof(Int32));
+                        break;
+                    case MicaKind.MicaAlt:
+                        DWMAPI.DwmSetWindowAttribute(TargetWindow.Handle, DWMAPI.DwmWindowAttribute.SystemBackdropType, ref MicaAlt, sizeof(Int32));
+                        break;
+                    default:
+                        DWMAPI.DwmSetWindowAttribute(TargetWindow.Handle, DWMAPI.DwmWindowAttribute.SystemBackdropType, ref Mica, sizeof(Int32));
+                        break;
+                }
+            }
+            else
+            {
+                int True = 1;
+                DWMAPI.DwmSetWindowAttribute(TargetWindow.Handle, DWMAPI.DwmWindowAttribute.MicaEffect, ref True, sizeof(Int32));
             }
         }
 

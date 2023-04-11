@@ -6,20 +6,15 @@ namespace TestApp
 {
     public partial class Form1 : Window
     {
-        /**Mica**/
-        AcrylicBrush _micaBrush;
         public Form1()
         {
             BackdropApplied = true;
             InitializeComponent();
-            _micaBrush = new /**Mica**/AcrylicBrush();
-            _micaBrush.TargetWindow = this;
-            //_micaBrush.Kind = MicaKind.MicaAlt;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            _micaBrush.ApplyBackdrop();
+            acrylicBrush1.ApplyBackdrop();
             ElementTheme = SystemThemeHandler.AppTheme;
             SystemThemeHandler.OnThemeChanged += SystemThemeHandler_OnThemeChanged;
         }
@@ -51,6 +46,14 @@ namespace TestApp
                 button3.ElementTheme = Theme.Light;
             else
                 button3.ElementTheme = Theme.Dark;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (customProgressBar1.ElementTheme == Theme.Dark)
+                customProgressBar1.ElementTheme = Theme.Light;
+            else
+                customProgressBar1.ElementTheme = Theme.Dark;
         }
     }
 }

@@ -35,6 +35,9 @@
             button1 = new Windows.UI.Controls.Button();
             textBlock1 = new Windows.UI.Controls.TextBlock();
             fontIcon1 = new Windows.UI.Controls.FontIcon();
+            customProgressBar1 = new Windows.UI.Controls.ProgressBar();
+            button4 = new Windows.UI.Controls.Button();
+            acrylicBrush1 = new Windows.UI.Composition.BackdropBrushes.AcrylicBrush();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -116,12 +119,44 @@
             fontIcon1.TextAlign = HorizontalAlignment.Center;
             fontIcon1.TextAlignVertical = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             // 
+            // customProgressBar1
+            // 
+            customProgressBar1.ElementTheme = Windows.UI.Theming.Theme.Light;
+            customProgressBar1.Error = false;
+            customProgressBar1.Location = new Point(737, 86);
+            customProgressBar1.Name = "customProgressBar1";
+            customProgressBar1.Size = new Size(170, 174);
+            customProgressBar1.Style = ProgressBarStyle.Marquee;
+            customProgressBar1.TabIndex = 10;
+            customProgressBar1.Value = 50;
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.Transparent;
+            button4.ButtonText = "Button Theme : ?";
+            button4.ElementTheme = Windows.UI.Theming.Theme.Dark;
+            button4.ForeColor = Color.FromArgb(255, 255, 255);
+            button4.Location = new Point(455, 376);
+            button4.Name = "button4";
+            button4.Size = new Size(170, 32);
+            button4.TabIndex = 11;
+            button4.Click += button4_Click;
+            // 
+            // acrylicBrush1
+            // 
+            acrylicBrush1.ForceOldWay = true;
+            acrylicBrush1.TargetWindow = this;
+            acrylicBrush1.Tint = Color.Teal;
+            acrylicBrush1.TintOpacity = 64;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1175, 690);
+            Controls.Add(button4);
+            Controls.Add(customProgressBar1);
             Controls.Add(fontIcon1);
             Controls.Add(textBlock1);
             Controls.Add(button1);
@@ -129,7 +164,6 @@
             Controls.Add(pictureBox1);
             Controls.Add(button3);
             Controls.Add(button2);
-            ExtendFrameIntoClientArea = true;
             ForeColor = Color.FromArgb(255, 255, 255);
             Glyph = 59245U;
             Name = "Form1";
@@ -148,5 +182,8 @@
         private Windows.UI.Controls.Button button1;
         private Windows.UI.Controls.TextBlock textBlock1;
         private Windows.UI.Controls.FontIcon fontIcon1;
+        private Windows.UI.Controls.ProgressBar customProgressBar1;
+        private Windows.UI.Controls.Button button4;
+        private Windows.UI.Composition.BackdropBrushes.AcrylicBrush acrylicBrush1;
     }
 }

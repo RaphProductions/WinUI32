@@ -35,7 +35,8 @@ namespace Windows.UI.Composition.Native
             TextColor,
             VisibleFrameBorderThickness,
             SystemBackdropType,
-            Last
+            Last, 
+            MicaEffect = 1029
         }
         public enum DwmSystemBackdropType
         {
