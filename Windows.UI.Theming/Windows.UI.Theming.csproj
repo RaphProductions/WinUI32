@@ -28,7 +28,7 @@ First Release</PackageReleaseNotes>
 
   <ItemGroup>
     <Reference Include="libmsstyle">
-      <HintPath>..\..\..\..\Downloads\libmsstyle.dll</HintPath>
+      <HintPath>..\lib\libmsstyle.dll</HintPath>
     </Reference>
   </ItemGroup>
 

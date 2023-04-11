@@ -38,6 +38,7 @@
             customProgressBar1 = new Windows.UI.Controls.ProgressBar();
             button4 = new Windows.UI.Controls.Button();
             acrylicBrush1 = new Windows.UI.Composition.BackdropBrushes.AcrylicBrush();
+            inkCanvas1 = new Windows.UI.Controls.InkCanvas();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -111,7 +112,7 @@
             fontIcon1.ElementTheme = Windows.UI.Theming.Theme.Light;
             fontIcon1.Font = new Font("Segoe Fluent Icons", 70F, FontStyle.Regular, GraphicsUnit.Point);
             fontIcon1.Glyph = 59228U;
-            fontIcon1.Location = new Point(792, 280);
+            fontIcon1.Location = new Point(682, 98);
             fontIcon1.Name = "fontIcon1";
             fontIcon1.Size = new Size(131, 128);
             fontIcon1.TabIndex = 9;
@@ -123,9 +124,9 @@
             // 
             customProgressBar1.ElementTheme = Windows.UI.Theming.Theme.Light;
             customProgressBar1.Error = false;
-            customProgressBar1.Location = new Point(737, 86);
+            customProgressBar1.Location = new Point(455, 314);
             customProgressBar1.Name = "customProgressBar1";
-            customProgressBar1.Size = new Size(170, 174);
+            customProgressBar1.Size = new Size(170, 24);
             customProgressBar1.Style = ProgressBarStyle.Marquee;
             customProgressBar1.TabIndex = 10;
             customProgressBar1.Value = 50;
@@ -149,12 +150,22 @@
             acrylicBrush1.Tint = Color.Teal;
             acrylicBrush1.TintOpacity = 64;
             // 
+            // inkCanvas1
+            // 
+            inkCanvas1.BackColor = Color.White;
+            inkCanvas1.Location = new Point(715, 354);
+            inkCanvas1.Name = "inkCanvas1";
+            inkCanvas1.Size = new Size(233, 222);
+            inkCanvas1.TabIndex = 12;
+            inkCanvas1.Text = "inkCanvas1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1175, 690);
+            Controls.Add(inkCanvas1);
             Controls.Add(button4);
             Controls.Add(customProgressBar1);
             Controls.Add(fontIcon1);
@@ -185,5 +196,6 @@
         private Windows.UI.Controls.ProgressBar customProgressBar1;
         private Windows.UI.Controls.Button button4;
         private Windows.UI.Composition.BackdropBrushes.AcrylicBrush acrylicBrush1;
+        private Windows.UI.Controls.InkCanvas inkCanvas1;
     }
 }
