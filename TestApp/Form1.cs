@@ -55,5 +55,19 @@ namespace TestApp
             else
                 customProgressBar1.ElementTheme = Theme.Dark;
         }
+
+        private void checkMark1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var c = new ContextMenu();
+            c.Location = new(100, 100);
+            c.AddItem(new() { ButtonText = "Change Theme", Height = 32 });
+            c.AddItem(new() { ButtonText = "Change Theme", Height = 32 });
+            c.AddItem(new() { ButtonText = "Change Theme", Height = 32 });
+            c.Show();
+        }
     }
 }

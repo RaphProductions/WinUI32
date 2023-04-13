@@ -24,6 +24,12 @@ namespace Windows.UI.Controls
             }
         }
 
+        public Control()
+        {
+            if (!VisualStyleHandler.Loaded)
+                VisualStyleHandler.LoadTheme(DesignMode);
+        }
+
         protected virtual void OnThemeChanged()
         {
             if (ThemeChanged != null)

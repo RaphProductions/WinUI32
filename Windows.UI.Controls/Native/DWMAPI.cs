@@ -24,7 +24,32 @@ namespace Windows.UI.Controls.Native
 
         public enum DwmWindowAttribute : uint
         {
-            UseImmersiveDarkMode = 20
+            NCRenderingEnabled = 1,
+            NCRenderingPolicy,
+            TransitionsForceDisabled,
+            AllowNCPaint,
+            CaptionButtonBounds,
+            NonClientRtlLayout,
+            ForceIconicRepresentation,
+            Flip3DPolicy,
+            ExtendedFrameBounds,
+            HasIconicBitmap,
+            DisallowPeek,
+            ExcludedFromPeek,
+            Cloak,
+            Cloaked,
+            FreezeRepresentation,
+            PassiveUpdateMode,
+            UseHostBackdropBrush,
+            UseImmersiveDarkMode = 20,
+            WindowCornerPreference = 33,
+            BorderColor,
+            CaptionColor,
+            TextColor,
+            VisibleFrameBorderThickness,
+            SystemBackdropType,
+            Last,
+            MicaEffect = 1029
         }
 
         [DllImport("dwmapi.dll", PreserveSig = true)]

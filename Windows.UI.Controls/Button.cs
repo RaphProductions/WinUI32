@@ -33,7 +33,11 @@ namespace Windows.UI.Controls
         private const int DTT_GLOWSIZE = 2048;
         private const int DTT_TEXTCOLOR = 1;
         private VisualStyle currentVs;
-        public Bitmap bp = new(100, 100);
+        private ThemedText fi;
+        private uint _icon;
+
+        public uint Icon { get { return _icon; } set { _icon = value; fi.Text = GlyphRenderer.GetGlyph(_icon).ToString(); fi.Color = ForeColor; } }
+        public Font IconFont { get { return fi.Font; } set { fi.Font = value; } }
 
         public string ButtonText
         {
@@ -49,6 +53,7 @@ namespace Windows.UI.Controls
             SetStyle(ControlStyles.Selectable | ControlStyles.StandardClick | ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
             OnThemeChanged();
+            fi = new();
         }
         protected override void OnEnabledChanged(EventArgs e)
         {
@@ -114,7 +119,7 @@ namespace Windows.UI.Controls
                     tpart = ThemeParts.Normal;
                     break;
             }
-            if (DesignMode)
+            /**if (DesignMode)
             {
                 buttonImage = new Bitmap(Width, Height);
 
@@ -130,7 +135,7 @@ namespace Windows.UI.Controls
                 g.FillPath(new SolidBrush(color), RoundedCornersRenderer.CreatePath(rect2, 7));
             }
             else
-            {
+            {**/
                 StylePart part = null;
 
                 if (UsingDarkMode)
@@ -141,8 +146,7 @@ namespace Windows.UI.Controls
                 
                 var renderer2 = new PartRenderer(currentVs, part);
                 buttonImage = renderer2.RenderPreview(tpart, Width, Height);
-                bp = buttonImage;
-            }
+            //}
 
             if (buttonImage == null)
             {
@@ -194,11 +198,16 @@ namespace Windows.UI.Controls
             NativeMethods.SelectObject(memoryHdc, Font.ToHfont());
             var h = NativeMethods.DrawThemeTextEx(renderer.Handle, memoryHdc, NativeMethods.WP_CAPTION, NativeMethods.CS_ACTIVE, ButtonText, -1, (int)(TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine), ref rect, ref opt);
 
+            var rect3 = new NativeMethods.RECT(0, 0, bounds.Bottom - bounds.Top, bounds.Bottom - bounds.Top);
+            NativeMethods.SelectObject(memoryHdc, IconFont.ToHfont());
+            var h2 = NativeMethods.DrawThemeTextEx(renderer.Handle, memoryHdc, NativeMethods.WP_CAPTION, NativeMethods.CS_ACTIVE, $"{(char)Icon}", -1, (int)(TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine), ref rect3, ref opt);
+
             const int SRCCOPY = 0x00CC0020;
             NativeMethods.BitBlt(hdc, bounds.Left, bounds.Top, bounds.Width, bounds.Height, memoryHdc, 0, 0, SRCCOPY);
             //NativeMethods.TransparentBlt(hdc, bounds.Left, bounds.Top, bounds.Width, bounds.Height, memoryHdc, 0, 0, bounds.Width, bounds.Height, (uint)Color.Magenta.ToArgb());
 
             args.Graphics.ReleaseHdc(hdc);
+
             base.OnPaint(args);
 
         }

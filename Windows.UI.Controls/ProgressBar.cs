@@ -64,13 +64,13 @@ namespace Windows.UI.Controls
                 BackColor = Color.FromArgb(36, 36, 36);
             }
 
-            if (DesignMode)
+            /**if (DesignMode)
             {
                 if (ProgressBarRenderer.IsSupported)
                     ProgressBarRenderer.DrawHorizontalBar(e.Graphics, e.ClipRectangle);
             }
             else
-            {
+            {**/
                 var currentTheme = UsingDarkMode ? VisualStyleHandler.DarkStyle : VisualStyleHandler.LightStyle;
 
                 var part = VisualStyleHandler.GetProgressbarBg(currentTheme);
@@ -78,26 +78,26 @@ namespace Windows.UI.Controls
                 var b = renderer2.RenderPreview(ThemeParts.Normal, Width, Height);
 
                 e.Graphics.DrawImage(b, new Point(0, 0));
-            }
+            //}
 
             if (rec.Width == 0)
                 return;
 
             if (DesignMode)
             {
-                e.Graphics.FillRectangle(Brushes.Green, 2, 2, rec.Width, rec.Height);
+                e.Graphics.FillRectangle(Brushes.Green, 0, 0, rec.Width, rec.Height);
             }
             else
             {
-                var currentTheme = UsingDarkMode ? VisualStyleHandler.DarkStyle : VisualStyleHandler.LightStyle;
+                var currentTheme2 = UsingDarkMode ? VisualStyleHandler.DarkStyle : VisualStyleHandler.LightStyle;
 
-                var part = VisualStyleHandler.GetProgressbarFill(currentTheme);
+                var part2 = VisualStyleHandler.GetProgressbarFill(currentTheme);
 
-                using var renderer2 = new PartRenderer(currentTheme, part);
+                using var renderer3 = new PartRenderer(currentTheme2, part2);
                 var tpart = Error ? ThemeParts.Pressed : ThemeParts.Normal;
-                var b = renderer2.RenderPreview(tpart, rec.Width, rec.Height);
+                var b2 = renderer3.RenderPreview(tpart, rec.Width, rec.Height);
 
-                e.Graphics.DrawImage(b, new Point(0, 0));
+                e.Graphics.DrawImage(b2, new Point(0, 0));
                 b.Dispose();
             }
         }

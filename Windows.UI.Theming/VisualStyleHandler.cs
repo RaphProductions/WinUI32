@@ -13,16 +13,29 @@ namespace Windows.UI.Theming
         public static VisualStyle DarkStyle = new();
         public static VisualStyle LightStyle = new();
 
-        public static void LoadTheme()
+        public static bool Loaded = false;
+
+        public static void LoadTheme(bool isDesigner = false)
         {
             // Extract visual styles
             var UserTempFiles = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Temp\\";
-            File.WriteAllBytes(UserTempFiles + "Light.msstyles", Properties.Resources.light);
-            File.WriteAllBytes(UserTempFiles + "Dark.msstyles", Properties.Resources.Dark);
+            if (isDesigner)
+            {
+                File.WriteAllBytes(UserTempFiles + "LightVS.msstyles", Properties.Resources.light);
+                File.WriteAllBytes(UserTempFiles + "DarkVS.msstyles", Properties.Resources.Dark);
+            }
+            else
+            {
+                File.WriteAllBytes(UserTempFiles + "Light.msstyles", Properties.Resources.light);
+                File.WriteAllBytes(UserTempFiles + "Dark.msstyles", Properties.Resources.Dark);
+            }
 
             // Load styles
             DarkStyle.Load(Path.Combine(UserTempFiles, "Dark.msstyles"));
             LightStyle.Load(Path.Combine(UserTempFiles, "Light.msstyles"));
+
+            // Define it as loaded 
+            Loaded = true;
         }
 
         public static StylePart GetCommandLinkPart(VisualStyle v)
@@ -51,13 +64,23 @@ namespace Windows.UI.Theming
         {
             return (from classes in v.Classes.Values where classes.ClassName == "Button" from parts in classes.Parts where parts.Value.PartName == "PUSHBUTTON" select parts.Value).FirstOrDefault();
         }
+        public static StylePart GetCheckBoxPart(VisualStyle v)
+        {
+            return (from classes in v.Classes.Values where classes.ClassName == "Button" from parts in classes.Parts where parts.Value.PartName == "CHECKBOX" select parts.Value).FirstOrDefault();
+        }
         public static StylePart GetEditBorder(VisualStyle v)
         {
             return (from classes in v.Classes.Values where classes.ClassName == "Edit" from parts in classes.Parts where parts.Value.PartName == "EDITBORDER_NOSCROLL" select parts.Value).FirstOrDefault();
         }
         public static StylePart GetEditBackground(VisualStyle v)
         {
-            return (from classes in v.Classes.Values where classes.ClassName == "Edit" from parts in classes.Parts where parts.Value.PartName == "EDITBORDER_NOSCROLL" select parts.Value).Last();
+            var list = (from classes in v.Classes.Values where classes.ClassName == "Edit" from parts in classes.Parts where parts.Value.PartName == "EDITBORDER_NOSCROLL" select parts.Value).ToList();
+            foreach (StylePart l in list)
+            {
+                if (l.PartId == 547)
+                    return l;
+            }
+            return null;
         }
     }
 }

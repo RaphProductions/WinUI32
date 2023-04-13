@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -122,10 +123,29 @@ namespace Windows.UI.Controls
         {
             foreach (System.Windows.Forms.Control c in Controls)
             {
-                // hell, i need to do that for each custom controls
-                if (c.GetType() == typeof(Button))
+                if (c.GetType() == typeof(Windows.UI.Controls.ProgressBar))
                 {
-                    ((Button)c).ElementTheme = this._elementTheme;
+                    ((ProgressBar)c).ElementTheme = this._elementTheme;
+                    if (ElementTheme == Theme.Dark)
+                        c.ForeColor = ThemeResource.DarkAppForegroundColor;
+                    else
+                        c.ForeColor = ThemeResource.LightAppForegroundColor;
+                }
+                else if (c.GetType().BaseType == typeof(Windows.UI.Controls.Control))
+                {
+                    ((Control)c).ElementTheme = this._elementTheme;
+                    if (ElementTheme == Theme.Dark)
+                        c.ForeColor = ThemeResource.DarkAppForegroundColor;
+                    else
+                        c.ForeColor = ThemeResource.LightAppForegroundColor;
+                }
+                else if (c.GetType().BaseType == typeof(Windows.UI.Controls.TextBox))
+                {
+                    ((TextBox)c).ElementTheme = this._elementTheme;
+                    if (ElementTheme == Theme.Dark)
+                        c.ForeColor = ThemeResource.DarkAppForegroundColor;
+                    else
+                        c.ForeColor = ThemeResource.LightAppForegroundColor;
                 }
                 else
                 {
